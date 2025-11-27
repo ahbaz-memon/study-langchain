@@ -13,3 +13,8 @@ llm = HuggingFacePipeline.from_model_id(
     device_map='auto',    
 )
 chat_model = ChatHuggingFace(llm=llm)
+
+result = chat_model.invoke("What is the capital of India")
+
+# result is dict which have metadata too
+print(result.content)
