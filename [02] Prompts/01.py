@@ -1,11 +1,11 @@
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+from langchain_google_genai import ChatGoogleGenerativeAI
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# a end-point from HuggingFace to us
-llm = HuggingFaceEndpoint(
-    repo_id="deepseek-ai/DeepSeek-R1",
-    task="text-generation",
-)
-chat_model = ChatHuggingFace(llm=llm)
+chat_model = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
+
+result = chat_model.invoke("What is the capital of India")
+
+# result is dict which have metadata too
+print(result.content)
