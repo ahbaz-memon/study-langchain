@@ -12,9 +12,10 @@ chat_message_prompt_template = ChatPromptTemplate([
     ('human', 'Explain in simple terms, what is {topic}'),
 ])
 
-chat_message_prompt = chat_message_prompt_template.invoke({
+chain = chat_message_prompt_template | chat_model
+
+result = chain.invoke({
     'domain': 'cricket',
     'topic': 'not-out',
 })
-
-print(chat_message_prompt)
+print(result.content)
