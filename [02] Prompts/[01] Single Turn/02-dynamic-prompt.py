@@ -44,13 +44,14 @@ prompt_template = PromptTemplate(
     input_variables=["paper_input", "style_input", "length_input"]
 )
 
-prompt = prompt_template.invoke({
-    "paper_input": paper_input,
-    "style_input": style_input,
-    "length_input": length_input,
-})
-
 if st.button('Summarize'):
-    print(prompt)
-    result = chat_model.invoke(prompt)
+    
+    # another way, chain method
+    chain = prompt_template | chat_model
+
+    result = chat_model.invoke({
+        "paper_input": paper_input,
+        "style_input": style_input,
+        "length_input": length_input,
+    })
     st.write(result.content)
