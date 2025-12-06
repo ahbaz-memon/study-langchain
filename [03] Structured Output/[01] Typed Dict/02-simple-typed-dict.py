@@ -16,3 +16,8 @@ class Review(TypedDict):
     sentiment: bool
 
 chat_model = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
+
+structured_chat_model = chat_model.with_structured_output(Review)
+
+result = structured_chat_model.invoke(review)
+print(result)
